@@ -1,0 +1,1086 @@
+{
+	"info": {
+		"_postman_id": "6486bea0-d3ab-431f-bbb9-22bc08607322",
+		"name": "MSA_DAY4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25548197"
+	},
+	"item": [
+		{
+			"name": "local",
+			"item": [
+				{
+					"name": "direct",
+					"item": [
+						{
+							"name": "accounts",
+							"item": [
+								{
+									"name": "CreateAccount Copy",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Madan Reddy\",\n    \"email\": \"tutor@eazybytes\",\n    \"mobileNumber\": \"4354437687\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:9206/api/create",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9206",
+											"path": [
+												"api",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FetchCustomerDetails Copy",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "eazybank-correlation-id",
+												"value": "43gtrt-trtrrtgf",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:9206/api/fetchCustomerDetails?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9206",
+											"path": [
+												"api",
+												"fetchCustomerDetails"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "UpdateAccountDetails Copy",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Madan Mohan\",\n    \"email\": \"tutor@eazybytes\",\n    \"mobileNumber\": \"4354437687\",\n    \"accountsDto\": {\n        \"accountNumber\": 1491902889,\n        \"accountType\": \"Savings\",\n        \"branchAddress\": \"123 Main Street, New York\"\n    }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:9206/api/update",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9206",
+											"path": [
+												"api",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteAccountDetails Copy",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9206/api/delete?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9206",
+											"path": [
+												"api",
+												"delete"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "build-info Copy",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9206/api/build-info",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9206",
+											"path": [
+												"api",
+												"build-info"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "java-version Copy",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9206/api/java-version",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9206",
+											"path": [
+												"api",
+												"java-version"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "contact-info Copy",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:9206/api/contact-info",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9206",
+											"path": [
+												"api",
+												"contact-info"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "RefreshConfig Copy",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:9206/actuator/refresh",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9206",
+											"path": [
+												"actuator",
+												"refresh"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "BusRefresh Copy",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9206/actuator/busrefresh",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9206",
+											"path": [
+												"actuator",
+												"busrefresh"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "ShutDown Copy",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9206/actuator/shutdown",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9206",
+											"path": [
+												"actuator",
+												"shutdown"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "cards",
+							"item": [
+								{
+									"name": "CreateCard Copy",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9207/api/create?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9207",
+											"path": [
+												"api",
+												"create"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FetchCardDetails Copy",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9207/api/fetch?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9207",
+											"path": [
+												"api",
+												"fetch"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "UpdateCardDetails Copy",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mobileNumber\": \"4354437687\",\n    \"cardNumber\": \"100107091026\",\n    \"cardType\": \"Debit Card\",\n    \"totalLimit\": 100000,\n    \"amountUsed\": 10000,\n    \"availableAmount\": 90000\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:9207/api/update",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9207",
+											"path": [
+												"api",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteCardDetails Copy",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9207/api/delete?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9207",
+											"path": [
+												"api",
+												"delete"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "loans",
+							"item": [
+								{
+									"name": "CreateLoan Copy",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9208/api/create?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9208",
+											"path": [
+												"api",
+												"create"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FetchLoanDetails Copy",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9208/api/fetch?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9208",
+											"path": [
+												"api",
+												"fetch"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "UpdateLoanDetails Copy",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mobileNumber\": \"4354437687\",\n    \"loanNumber\": \"10071469799154\",\n    \"loanType\": \"Vehicle Loan\",\n    \"totalLoan\": -100000,\n    \"amountPaid\": -10000,\n    \"outstandingAmount\": -90000\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:9208/api/update",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9208",
+											"path": [
+												"api",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteLoanDetails Copy",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9208/api/delete?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9208",
+											"path": [
+												"api",
+												"delete"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "gateway",
+					"item": [
+						{
+							"name": "accounts",
+							"item": [
+								{
+									"name": "CreateAccount",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Madan Reddy\",\n    \"email\": \"tutor@eazybytes\",\n    \"mobileNumber\": \"4354437687\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:9202/mgbank/accounts/api/create",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9202",
+											"path": [
+												"mgbank",
+												"accounts",
+												"api",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FetchCustomerDetails",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "eazybank-correlation-id",
+												"value": "43gtrt-trtrrtgf",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:9202/mgbank/accounts/api/fetchCustomerDetails?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9202",
+											"path": [
+												"mgbank",
+												"accounts",
+												"api",
+												"fetchCustomerDetails"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "UpdateAccountDetails",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Madan Mohan\",\n    \"email\": \"tutor@eazybytes\",\n    \"mobileNumber\": \"4354437687\",\n    \"accountsDto\": {\n        \"accountNumber\": 1246417599,\n        \"accountType\": \"Savings\",\n        \"branchAddress\": \"123 Main Street, New York\"\n    }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:9206/api/update",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9206",
+											"path": [
+												"api",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteAccountDetails",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9206/api/delete?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9206",
+											"path": [
+												"api",
+												"delete"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Account_HostName",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9202/mgbank/accounts/api/getHostName",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9202",
+											"path": [
+												"mgbank",
+												"accounts",
+												"api",
+												"getHostName"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "mgbank/accounts/api/contact-info",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9202/mgbank/accounts/api/contact-info",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9202",
+											"path": [
+												"mgbank",
+												"accounts",
+												"api",
+												"contact-info"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "cards",
+							"item": [
+								{
+									"name": "CreateCard",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9202/mgbank/cards/api/create?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9202",
+											"path": [
+												"mgbank",
+												"cards",
+												"api",
+												"create"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FetchCardDetails Copy",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9202/mgbank/cards/api/fetch?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9202",
+											"path": [
+												"mgbank",
+												"cards",
+												"api",
+												"fetch"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "UpdateCardDetails Copy",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mobileNumber\": \"4354437687\",\n    \"cardNumber\": \"100107091026\",\n    \"cardType\": \"Debit Card\",\n    \"totalLimit\": 100000,\n    \"amountUsed\": 10000,\n    \"availableAmount\": 90000\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:9202/mgbank/cards/api/update",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9202",
+											"path": [
+												"mgbank",
+												"cards",
+												"api",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteCardDetails Copy",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9207/api/delete?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9207",
+											"path": [
+												"api",
+												"delete"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Cards_HostName",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9202/mgbank/cards/api/getHostName",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9202",
+											"path": [
+												"mgbank",
+												"cards",
+												"api",
+												"getHostName"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Loans_HostName",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9202/mgbank/cards/api/getLoanHostName",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9202",
+											"path": [
+												"mgbank",
+												"cards",
+												"api",
+												"getLoanHostName"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "loans",
+							"item": [
+								{
+									"name": "CreateLoan",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9208/api/create?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9208",
+											"path": [
+												"api",
+												"create"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FetchLoanDetails",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9208/api/fetch?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9208",
+											"path": [
+												"api",
+												"fetch"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "UpdateLoanDetails",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mobileNumber\": \"4354437687\",\n    \"loanNumber\": \"10071469799154\",\n    \"loanType\": \"Vehicle Loan\",\n    \"totalLoan\": -100000,\n    \"amountPaid\": -10000,\n    \"outstandingAmount\": -90000\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:9208/api/update",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9208",
+											"path": [
+												"api",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteLoanDetails",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9208/api/delete?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9208",
+											"path": [
+												"api",
+												"delete"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "contact-info Copy",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8090/api/contact-info",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8090",
+											"path": [
+												"api",
+												"contact-info"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "prod",
+			"item": [
+				{
+					"name": "로드밸런싱_테스트",
+					"item": [
+						{
+							"name": "직접호출_cardHostName",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Connection",
+										"value": "close",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://192.168.100.221:30317/api/getHostName",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30317",
+									"path": [
+										"api",
+										"getHostName"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "직접호출_LoanHostNameByCard_Open_Feign",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30317/api/getLoanHostName",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30317",
+									"path": [
+										"api",
+										"getLoanHostName"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "APIGateway_CardHostName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30312/eazybank/cards/api/getHostName",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"eazybank",
+										"cards",
+										"api",
+										"getHostName"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "APIGateway_AccountHostName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30312/eazybank/accounts/api/getHostName",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"eazybank",
+										"accounts",
+										"api",
+										"getHostName"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

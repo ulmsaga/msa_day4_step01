@@ -504,6 +504,95 @@
 					"name": "gateway",
 					"item": [
 						{
+							"name": "기본Routes구성",
+							"item": [
+								{
+									"name": "CreateAccount Copy",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Madan Reddy\",\n    \"email\": \"tutor@eazybytes\",\n    \"mobileNumber\": \"4354437687\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:9202/ACCOUNTS/api/create",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9202",
+											"path": [
+												"ACCOUNTS",
+												"api",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FetchCustomerDetails Copy",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "eazybank-correlation-id",
+												"value": "43gtrt-trtrrtgf",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:9202/ACCOUNTS/api/fetchCustomerDetails?mobileNumber=4354437687",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9202",
+											"path": [
+												"ACCOUNTS",
+												"api",
+												"fetchCustomerDetails"
+											],
+											"query": [
+												{
+													"key": "mobileNumber",
+													"value": "4354437687"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "contact-info Copy",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9202/ACCOUNTS/api/contact-info",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9202",
+											"path": [
+												"ACCOUNTS",
+												"api",
+												"contact-info"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
 							"name": "accounts",
 							"item": [
 								{
@@ -649,7 +738,7 @@
 									"response": []
 								},
 								{
-									"name": "mgbank/accounts/api/contact-info",
+									"name": "contact-info",
 									"request": {
 										"method": "GET",
 										"header": [],
@@ -665,6 +754,28 @@
 												"accounts",
 												"api",
 												"contact-info"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "build-info",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:9202/mgbank/accounts/api/build-info",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9202",
+											"path": [
+												"mgbank",
+												"accounts",
+												"api",
+												"build-info"
 											]
 										}
 									},

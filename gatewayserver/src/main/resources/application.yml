@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: "local"
+    active: "prod"
   application:
     name: "gatewayserver"
   cloud:
@@ -11,7 +11,7 @@ spring:
       discovery:
         locator:
           ## locate all services registered in Eureka server (Actuator to get the list of services)
-          # enabled: true
+          enabled: false
           lower-case-service-id: true
       httpclient:
         ## default 30000,

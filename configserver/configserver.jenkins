@@ -50,20 +50,27 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 dir('configserver') {
-                    sh "docker build -t ${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION} -f configserver.Dockerfile ../../"
+                    sh "docker build -t ${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION} ."
                 }
             }
         }
 
+        // stage('Push Docker Image') {
+            // steps {
+                // script {
+                    // docker.withRegistry("http://${DOCKER_REGISTRY}") {
+                        // docker.image("${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION}").push()
+                    // }
+                // }
+            // }
+        // }
+
         stage('Push Docker Image') {
             steps {
-                script {
-                    docker.withRegistry("http://${DOCKER_REGISTRY}") {
-                        docker.image("${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION}").push()
-                    }
-                }
+                sh "docker push ${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION}"
             }
         }
+        
 
         stage('Deploy and Service to Kubernetes') {
             steps {

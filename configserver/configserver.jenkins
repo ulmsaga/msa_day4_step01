@@ -82,11 +82,11 @@ pipeline {
             }
         }
 
-        stage('Deployment Image Update') {
-            steps {
-                sh "kubectl set image deployment/${APP}-deployment ${APP}-container=${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION} --namespace=${NAMESPACE}"
-            }
-        }
+        // stage('Deployment Image Update') {
+            // steps {
+                // sh "kubectl set image deployment/${APP}-deployment ${APP}-container=${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION} --namespace=${NAMESPACE}"
+            // }
+        // }
     }
     post {
         always {

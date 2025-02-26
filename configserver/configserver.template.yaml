@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: team3-lsc-configserver-container
-        image: k8s-vga-worker1:5000/group1-team3-lsc-configserver:_IMAGE_TAG_
+        image: k8s-vga-worker1:5000/group1-team3-lsc-configserver:_VERSION_
         imagePullPolicy: Always
         ports:
         - containerPort: 9200

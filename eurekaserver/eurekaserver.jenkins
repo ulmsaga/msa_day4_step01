@@ -7,7 +7,7 @@ pipeline {
         GIT_CREDENTIAL_ID = 'sclee1115'
         DOCKER_REGISTRY = 'k8s-vga-worker1:5000'
         NAMESPACE = 'group1-team3'
-        APP = 'team3-lsc-configserver'
+        APP = 'team3-lsc-eurekaserver'
         JAVA_HOME = "/usr/local/java21"
         PATH = "${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${PATH}"
     }
@@ -21,7 +21,7 @@ pipeline {
         
         stage('Check Java Version') {
             steps {
-                dir('configserver') {
+                dir('eurekaserver') {
                     sh 'echo "Using Java from: $JAVA_HOME"'
                     sh 'java -version'
                 }
@@ -30,7 +30,7 @@ pipeline {
   
         stage('Build with Maven') {
             steps {
-                dir('configserver') {
+                dir('eurekaserver') {
                     sh 'mvn clean package -DskipTests'
                 }
             }
@@ -38,7 +38,7 @@ pipeline {
 
         stage('Set Version from POM') {
             steps {
-                dir('configserver') {
+                dir('eurekaserver') {
                     script {
                         env.VERSION = sh(script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true).trim()
                         echo "Set version from POM: ${VERSION}"
@@ -49,35 +49,25 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                dir('configserver') {
+                dir('eurekaserver') {
                     sh "docker build -t ${DOCKER_REGISTRY}/${NAMESPACE}-${APP}:v${VERSION} ."
                 }
             }
         }
        
         stage('Push Docker Image') {
-            // steps {
-                // script {
-                    // docker.withRegistry("http://${DOCKER_REGISTRY}") {
-                        // docker.image("${DOCKER_REGISTRY}/${NAMESPACE}-${APP}:v${VERSION}").push()
-                    // }
-                // }
-            // }
-
             steps {
                 sh "docker push ${DOCKER_REGISTRY}/${NAMESPACE}-${APP}:v${VERSION}"
             }
         }
-        
 
         stage('Deploy and Service to Kubernetes') {
             steps {
-                dir('configserver') {
+                dir('eurekaserver') {
                     sh """
-                        sed 's/:_VERSION_/:v${VERSION}/g' ./configserver.template.yaml > ./configserver.yaml
-                        kubectl apply -f ./configserver.yaml -n ${NAMESPACE}
+                        sed 's/:$VERSION/:v${VERSION}/g' ./eurekaserver.template.yaml > ./eurekaserver.yaml
+                        kubectl apply -f ./eurekaserver.yaml -n ${NAMESPACE}
                     """
-                    // sh "kubectl apply -f ./configserver.yaml -n ${NAMESPACE}"
                 }
             }
         }

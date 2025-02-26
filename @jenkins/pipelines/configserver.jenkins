@@ -9,7 +9,8 @@ pipeline {
         PREFIX = 'group1-team3'
         APP = 'team3-lsc-configserver'
         JAVA_HOME = "/jdk-21.0.5"
-        PATH = "${JAVA_HOME}/bin:${PATH}"
+        MAVEN_HOME = "/usr/share/maven"
+        PATH = "${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${PATH}"
     }
 
     stages {
@@ -22,8 +23,11 @@ pipeline {
         stage('Check Java Version') {
             steps {
                 dir('configserver') {
-                    sh 'echo "Using Java from: $JAVA_HOME"'
-                    sh 'java -version'
+                    sh '''
+                        echo "JAVA_HOME: $JAVA_HOME"
+                        echo "PATH: $PATH"
+                        $JAVA_HOME/bin/java -version
+                    '''
                 }
             }
         }
@@ -31,9 +35,9 @@ pipeline {
         stage('Extract Version') {
             steps {
                 script {
-                    // Extract version from pom.xml
+                    sh "export JAVA_HOME=${JAVA_HOME}"
                     VERSION = sh(
-                        script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout",
+                        script: "$JAVA_HOME/bin/java -version && mvn help:evaluate -Dexpression=project.version -q -DforceStdout",
                         returnStdout: true
                     ).trim()
                     echo "Extracted version: ${VERSION}"
@@ -44,7 +48,11 @@ pipeline {
         stage('Build with Maven') {
             steps {
                 dir('configserver') {
-                    sh 'mvn clean package -DskipTests'
+                    sh """
+                        export JAVA_HOME=${JAVA_HOME}
+                        export PATH=${JAVA_HOME}/bin:\$PATH
+                        mvn clean package -DskipTests
+                    """
                 }
             }
         }
@@ -52,8 +60,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 dir('@jenkins/dockerfiles') {
-                    // docker.build("${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION}", "--platform=linux/amd64 .")
-                    // docker.build("${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION}")
                     sh "docker build -t ${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION} -f configserver.Dockerfile ../../"
                 }
             }
@@ -72,14 +78,9 @@ pipeline {
         stage('Deploy and Service to Kubernetes') {
             steps {
                 dir('@jenkins/k8s') {
-                    // 이전 배포 방식
-                    // sh "kubectl apply -f ./configserver.yaml -n ${NAMESPACE}"
-                    
-                    // 새로운 배포 방식 - 버전 동적 처리
                     sh """
                         sed 's/:_IMAGE_TAG_/:v${VERSION}/g' configserver.template.yaml > configserver.yaml
                         kubectl apply -f configserver.yaml -n ${NAMESPACE}
-                        # rm configserver.yaml
                     """
                 }
             }

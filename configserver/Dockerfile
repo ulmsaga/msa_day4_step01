@@ -3,5 +3,5 @@
 
 FROM openjdk:21-jdk-slim
 ARG JAR_FILE=target/*.jar
-COPY configserver/target/configserver.jar app.jar
+COPY target/configserver.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]

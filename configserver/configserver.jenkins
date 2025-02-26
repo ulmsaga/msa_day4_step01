@@ -36,6 +36,17 @@ pipeline {
             }
         }
 
+        stage('Set Version from POM') {
+            steps {
+                dir('configserver') {
+                    script {
+                        env.VERSION = sh(script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true).trim()
+                        echo "Set version from POM: ${VERSION}"
+                    }
+                }
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 dir('configserver') {

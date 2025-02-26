@@ -6,4 +6,4 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://eurekaserver-service:80/eureka/
+      defaultZone: http://team3-lsc-eurekaserver-service:80/eureka/

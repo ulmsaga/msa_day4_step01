@@ -73,11 +73,11 @@ pipeline {
         stage('Deploy and Service to Kubernetes') {
             steps {
                 dir('configserver') {
-                    // sh """
-                        // sed 's/:_IMAGE_TAG_/:v${VERSION}/g' configserver.template.yaml > configserver.yaml
-                        // kubectl apply -f configserver.yaml -n ${NAMESPACE}
-                    // """
-                    sh "kubectl apply -f ./configserver.yaml -n ${NAMESPACE}"
+                    sh """
+                        sed 's/:_IMAGE_TAG_/:v${VERSION}/g' ./configserver.template.yaml > ./configserver.yaml
+                        kubectl apply -f ./configserver.yaml -n ${NAMESPACE}
+                    """
+                    // sh "kubectl apply -f ./configserver.yaml -n ${NAMESPACE}"
                 }
             }
         }

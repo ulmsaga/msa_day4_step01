@@ -47,18 +47,14 @@ pipeline {
         stage('Build with Maven') {
             steps {
                 dir('configserver') {
-                    sh """
-                        export JAVA_HOME=${JAVA_HOME}
-                        export PATH=${JAVA_HOME}/bin:\$PATH
-                        mvn clean package -DskipTests
-                    """
+                    sh 'mvn clean package -DskipTests'
                 }
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                dir('@jenkins/dockerfiles') {
+                dir('configserver') {
                     sh "docker build -t ${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION} -f configserver.Dockerfile ../../"
                 }
             }
@@ -76,7 +72,7 @@ pipeline {
 
         stage('Deploy and Service to Kubernetes') {
             steps {
-                dir('@jenkins/k8s') {
+                dir('configserver') {
                     sh """
                         sed 's/:_IMAGE_TAG_/:v${VERSION}/g' configserver.template.yaml > configserver.yaml
                         kubectl apply -f configserver.yaml -n ${NAMESPACE}

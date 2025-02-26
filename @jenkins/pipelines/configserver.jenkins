@@ -1,0 +1,100 @@
+pipeline {
+    agent any
+
+    environment {
+        GIT_REPO = 'https://github.com/ulmsaga/msa_day4_step01.git'
+        GIT_BRANCH = 'main'
+        GIT_CREDENTIAL_ID = 'sclee1115'
+        DOCKER_REGISTRY = 'k8s-vga-worker1:5000'
+        PREFIX = 'group1-team3'
+        APP = 'team3-lsc-configserver'
+        JAVA_HOME = "/usr/local/java21"
+        # MAVEN_HOME = "/usr/share/maven"
+        PATH = "${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${PATH}"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: "${GIT_BRANCH}", url: "${GIT_REPO}"
+            }
+        }
+        
+        stage('Check Java Version') {
+            steps {
+                dir('configserver') {
+                    sh '''
+                        echo "JAVA_HOME: $JAVA_HOME"
+                        echo "PATH: $PATH"
+                        $JAVA_HOME/bin/java -version
+                    '''
+                }
+            }
+        }
+
+        stage('Extract Version') {
+            steps {
+                script {
+                    sh "export JAVA_HOME=${JAVA_HOME}"
+                    VERSION = sh(
+                        script: "$JAVA_HOME/bin/java -version && mvn help:evaluate -Dexpression=project.version -q -DforceStdout",
+                        returnStdout: true
+                    ).trim()
+                    echo "Extracted version: ${VERSION}"
+                }
+            }
+        }
+
+        stage('Build with Maven') {
+            steps {
+                dir('configserver') {
+                    sh """
+                        export JAVA_HOME=${JAVA_HOME}
+                        export PATH=${JAVA_HOME}/bin:\$PATH
+                        mvn clean package -DskipTests
+                    """
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                dir('@jenkins/dockerfiles') {
+                    sh "docker build -t ${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION} -f configserver.Dockerfile ../../"
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry("http://${DOCKER_REGISTRY}") {
+                        docker.image("${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION}").push()
+                    }
+                }
+            }
+        }
+
+        stage('Deploy and Service to Kubernetes') {
+            steps {
+                dir('@jenkins/k8s') {
+                    sh """
+                        sed 's/:_IMAGE_TAG_/:v${VERSION}/g' configserver.template.yaml > configserver.yaml
+                        kubectl apply -f configserver.yaml -n ${NAMESPACE}
+                    """
+                }
+            }
+        }
+
+        stage('Deployment Image Update') {
+            steps {
+                sh "kubectl set image deployment/${APP}-deployment ${APP}-container=${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION} --namespace=${NAMESPACE}"
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}

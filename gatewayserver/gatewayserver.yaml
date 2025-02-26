@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: team3-lsc-gatewayserver-container
-        image: k8s-vga-worker1:5000/group1-team3-lsc-gatewayserver:0.0.1
+        image: k8s-vga-worker1:5000/group1-team3-lsc-gatewayserver:v0.0.1
         imagePullPolicy: Always
         ports:
         - containerPort: 9202

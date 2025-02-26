@@ -2,7 +2,7 @@ server:
   port: 9208
 spring:
   profiles:
-    active: "local"
+    active: "prod"
   application:
     name: "loans"
   datasource:

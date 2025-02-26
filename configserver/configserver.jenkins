@@ -6,7 +6,7 @@ pipeline {
         GIT_BRANCH = 'main'
         GIT_CREDENTIAL_ID = 'sclee1115'
         DOCKER_REGISTRY = 'k8s-vga-worker1:5000'
-        PREFIX = 'group1-team3'
+        NAMESPACE = 'group1-team3'
         APP = 'team3-lsc-configserver'
         JAVA_HOME = "/usr/local/java21"
         PATH = "${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${PATH}"
@@ -50,7 +50,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 dir('configserver') {
-                    sh "docker build -t ${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION} ."
+                    sh "docker build -t ${DOCKER_REGISTRY}/${NAMESPACE}-${APP}:v${VERSION} ."
                 }
             }
         }
@@ -59,13 +59,13 @@ pipeline {
             // steps {
                 // script {
                     // docker.withRegistry("http://${DOCKER_REGISTRY}") {
-                        // docker.image("${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION}").push()
+                        // docker.image("${DOCKER_REGISTRY}/${NAMESPACE}-${APP}:v${VERSION}").push()
                     // }
                 // }
             // }
 
             steps {
-                sh "docker push ${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION}"
+                sh "docker push ${DOCKER_REGISTRY}/${NAMESPACE}-${APP}:v${VERSION}"
             }
         }
         
@@ -84,7 +84,7 @@ pipeline {
 
         // stage('Deployment Image Update') {
             // steps {
-                // sh "kubectl set image deployment/${APP}-deployment ${APP}-container=${DOCKER_REGISTRY}/${PREFIX}-${APP}:v${VERSION} --namespace=${NAMESPACE}"
+                // sh "kubectl set image deployment/${APP}-deployment ${APP}-container=${DOCKER_REGISTRY}/${NAMESPACE}-${APP}:v${VERSION} --namespace=${NAMESPACE}"
             // }
         // }
     }

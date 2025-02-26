@@ -1,6 +1,6 @@
 spring:
   config:
-    import: "optional:configserver:http://configserver-service:80/"
+    import: "optional:configserver:http://team3-lsc-configserver-service:80/"
 
 eureka:
   client:

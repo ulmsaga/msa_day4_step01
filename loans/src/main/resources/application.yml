@@ -18,6 +18,12 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  kafka:
+    consumer:
+      group-id: loans-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
 management:
   endpoints:
@@ -46,6 +52,8 @@ info:
 
 logging:
   level:
+    root: INFO
     com:
       eazybytes:
         loans: DEBUG
+    org.springframework: INFO

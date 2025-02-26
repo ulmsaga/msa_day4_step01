@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: accounts-deployment
+  name: team3-lsc-accounts-deployment
   namespace: group1-team3
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: accounts-app
+      app: team3-lsc-accounts-app
   template:
     metadata:
       labels:
-        app: accounts-app
+        app: team3-lsc-accounts-app
     spec:
       containers:
-      - name: accounts-container
-        image: k8s-vga-worker1:5000/group1-team3-accounts:$VERSION
+      - name: team3-lsc-accounts-container
+        image: k8s-vga-worker1:5000/group1-team3-lsc-accounts:$VERSION
         imagePullPolicy: Always
         ports:
         - containerPort: 9206
@@ -23,11 +23,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: accounts-service
+  name: team3-lsc-accounts-service
   namespace: group1-team3
 spec:
   selector:
-    app: accounts-app
+    app: team3-lsc-accounts-app
   ports:
     - protocol: TCP
       port: 80

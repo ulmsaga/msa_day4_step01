@@ -7,6 +7,7 @@ pipeline {
         GIT_CREDENTIAL_ID = 'sclee1115'
         DOCKER_REGISTRY = 'k8s-vga-worker1:5000'
         NAMESPACE = 'group1-team3'
+        IMAGE_NAME = 'group1-team3-lsc-configserver'
         APP = 'team3-lsc-configserver'
         JAVA_HOME = "/usr/local/java21"
         PATH = "${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${PATH}"
@@ -50,7 +51,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 dir('configserver') {
-                    sh "docker build -t ${DOCKER_REGISTRY}/${NAMESPACE}-${APP}:v${VERSION} ."
+                    sh "docker build -t ${DOCKER_REGISTRY}/${IMAGE_NAME}:v${VERSION} ."
                 }
             }
         }
@@ -65,7 +66,7 @@ pipeline {
             // }
 
             steps {
-                sh "docker push ${DOCKER_REGISTRY}/${NAMESPACE}-${APP}:v${VERSION}"
+                sh "docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:v${VERSION}"
             }
         }
         
@@ -74,7 +75,7 @@ pipeline {
             steps {
                 dir('configserver') {
                     sh """
-                        sed 's/:_VERSION_/:v${VERSION}/g' ./configserver.template.yaml > ./configserver.yaml
+                        sed 's/:$VERSION/:v${VERSION}/g' ./configserver.template.yaml > ./configserver.yaml
                         kubectl apply -f ./configserver.yaml -n ${NAMESPACE}
                     """
                     // sh "kubectl apply -f ./configserver.yaml -n ${NAMESPACE}"
@@ -84,7 +85,7 @@ pipeline {
 
         stage('Deployment Image Update') {
             steps {
-                sh "kubectl set image deployment/${APP}-deployment ${APP}-container=${DOCKER_REGISTRY}/${NAMESPACE}-${APP}:v${VERSION} --namespace=${NAMESPACE}"
+                sh "kubectl set image deployment/${APP}-deployment ${APP}-container=${DOCKER_REGISTRY}/${IMAGE_NAME}:v${VERSION} --namespace=${NAMESPACE}"
             }
         }
     }

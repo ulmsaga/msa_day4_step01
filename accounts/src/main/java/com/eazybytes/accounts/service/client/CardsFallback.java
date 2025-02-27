@@ -18,9 +18,9 @@ public class CardsFallback implements CardsFeignClient {
 
     private final RabbitTemplate rabbitTemplate;
 
-    public CardsFallback(KafkaTemplate<String, String> kafkaTemplate, RabbitTemplate rabbitTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
+    public CardsFallback(RabbitTemplate rabbitTemplate, KafkaTemplate<String, String> kafkaTemplate) {
         this.rabbitTemplate = rabbitTemplate;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     @Override
@@ -29,11 +29,11 @@ public class CardsFallback implements CardsFeignClient {
         String fallbackMessage = String.format("Cards service is down! CorrelationId: %s, MobileNumber: %s", correlationId, mobileNumber);
 
         // KAFKA로 대체 로직을 보내는 코드
-        // log.info("[KafkaTemplate] Cards Fallback Send: {}", fallbackMessage);
-        // kafkaTemplate.send(TOPIC, fallbackMessage);
+        log.info("[KafkaTemplate] Cards Fallback Send: {}", fallbackMessage);
+        kafkaTemplate.send(TOPIC, fallbackMessage);
 
         // RabbitMQ로 대체 로직을 보내는 코드
-        log.info("[RabbitTemplate] Loans Fallback Send: {}", fallbackMessage);
+        log.info("[RabbitTemplate] Cards Fallback Send: {}", fallbackMessage);
         rabbitTemplate.convertAndSend("loans-fallback-queue", fallbackMessage);
         
         return ResponseEntity.ok(new CardsDto());

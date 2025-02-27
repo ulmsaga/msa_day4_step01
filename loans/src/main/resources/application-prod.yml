@@ -2,7 +2,7 @@ spring:
   config:
     import: "optional:configserver:http://team3-lsc-configserver-service:80/"
   kafka:
-    bootstrap-servers: kafka.group1-team3:9092
+    bootstrap-servers: bootstrap-servers:9092
 
 eureka:
   client:

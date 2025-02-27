@@ -2,7 +2,7 @@ spring:
   config:
     import: "optional:configserver:http://team3-lsc-configserver-service:80/"
   kafka:
-    bootstrap-servers: kafka.group1-team3:9092
+    bootstrap-servers: kafka-headless:9092
   rabbitmq:
     host: rabbitmq.group1-team3
     port: 5672

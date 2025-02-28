@@ -1,5 +1,5 @@
 
-Fallbak Message GUI (VPN 연결 후 사용 하세요)
+Fallbak Message GUI
 
 http://192.168.100.221:30304/
 

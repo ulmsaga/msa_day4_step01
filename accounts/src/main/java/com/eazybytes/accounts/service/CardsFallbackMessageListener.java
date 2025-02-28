@@ -17,8 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 public class CardsFallbackMessageListener {
 
     private final EventEmitter eventEmitter;
-    private final String CARD_CALLBACK_QUEUE = "cards-fallback-queue";
-    private final String CARD_CALLBACK_TOPIC = "cards-fallback-topic";
+    public static final String CARD_CALLBACK_QUEUE = "cards-fallback-queue";
+    public static final String CARD_CALLBACK_TOPIC = "cards-fallback-topic";
     private final String CARD_CALLBACK_GROUP = "accounts-group";
 
     public CardsFallbackMessageListener(EventEmitter eventEmitter) {

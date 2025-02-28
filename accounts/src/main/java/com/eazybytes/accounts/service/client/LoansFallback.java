@@ -6,6 +6,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 import com.eazybytes.accounts.dto.LoansDto;
+import com.eazybytes.accounts.service.LoansFallbackMessageListener;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,8 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 public class LoansFallback implements LoansFeignClient {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
-    private static final String TOPIC = "loans-fallback-topic";
-
     private final RabbitTemplate rabbitTemplate;
 
     public LoansFallback(RabbitTemplate rabbitTemplate, KafkaTemplate<String, String> kafkaTemplate) {
@@ -30,11 +29,11 @@ public class LoansFallback implements LoansFeignClient {
 
         // KAFAK로 대체 로직을 보내는 코드
         log.info("[KafkaTemplate] Loans Fallback Send: {}", fallbackMessage);
-        kafkaTemplate.send(TOPIC, fallbackMessage);
+        kafkaTemplate.send(LoansFallbackMessageListener.LOAN_CALLBACK_TOPIC, fallbackMessage);
 
         // RabbitMQ로 대체 로직을 보내는 코드
         log.info("[RabbitTemplate] Loans Fallback Send: {}", fallbackMessage);
-        rabbitTemplate.convertAndSend("loans-fallback-queue", fallbackMessage);
+        rabbitTemplate.convertAndSend(LoansFallbackMessageListener.LOAN_CALLBACK_QUEUE, fallbackMessage);
 
         return ResponseEntity.ok(new LoansDto());
     }

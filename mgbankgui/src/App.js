@@ -3,8 +3,13 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 
 function App() {
   const [messages, setMessages] = useState([]);
-  const SSE_URL = `${process.env.REACT_APP_API_URL}/mgbank/accounts/subscribe`;
-  const SSE_TYPES = ['sse_message', 'loans-fallback-queue', 'loans-fallback-topic', 'cards-fallback-queue', 'cards-fallback-topic'];
+  const SSE_URL = '/mgbank/accounts/subscribe';  // 상대 경로로 변경
+  const SSE_TYPES = [
+    { msgBroker: 'RabbitMQ', eventType: 'loans-fallback-queue' },
+    { msgBroker: 'Kafka', eventType: 'loans-fallback-topic' },
+    { msgBroker: 'RabbitMQ', eventType: 'cards-fallback-queue' },
+    { msgBroker: 'Kafka', eventType: 'cards-fallback-topic' }
+  ];
 
   // ------------------------------------------------------------------------------------------------------
   // SSE Management
@@ -14,8 +19,8 @@ function App() {
     console.log("[sse] setupEventSource ");
     eventSourceRef.current = new EventSource(SSE_URL);
 
-    SSE_TYPES.forEach((SSE_TYPE) => {
-      eventSourceRef.current.addEventListener(SSE_TYPE, (ret) => {
+    SSE_TYPES.forEach((sseConfig) => {
+      eventSourceRef.current.addEventListener(sseConfig.eventType, (ret) => {
         const receiveData = JSON.parse(ret.data);
         // BackEnd SSE 초기화 Message :: receiveData === "OK" OR receiveData === "200"
         if (receiveData !== "OK" && receiveData !== "200") {
@@ -24,7 +29,8 @@ function App() {
             const messagesWithTimestamp = receiveData.map((msg) => ({
               ...msg,
               receivedAt: currentTime,
-              sseType: SSE_TYPE
+              sseType: sseConfig.eventType,
+              msgBroker: sseConfig.msgBroker
             }));
             setMessages((prevMessages) => [...messagesWithTimestamp, ...prevMessages]); // 새로운 메시지를 앞에 추가
           }
@@ -130,16 +136,18 @@ function App() {
           <TableHead>
             <TableRow>
               <TableCell sx={{ width: '15%' }}>Received At</TableCell>
+              <TableCell sx={{ width: '15%' }}>Message Broker</TableCell>
               <TableCell sx={{ width: '15%' }}>Event Type</TableCell>
               <TableCell sx={{ width: '15%' }}>Correlation ID</TableCell>
               <TableCell sx={{ width: '15%' }}>Mobile Number</TableCell>
-              <TableCell sx={{ width: '40%' }}>Fallback FUll Message</TableCell>
+              <TableCell sx={{ width: '30%' }}>Fallback Full Message</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {messages.map((msg, index) => (
               <TableRow key={index}>
                 <TableCell>{msg.receivedAt}</TableCell>
+                <TableCell>{msg.msgBroker}</TableCell>
                 <TableCell>{msg.sseType}</TableCell>
                 <TableCell>{msg.correlationId}</TableCell>
                 <TableCell>{msg.mobileNumber}</TableCell>

@@ -17,8 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 public class LoansFallbackMessageListener {
 
     private final EventEmitter eventEmitter;
-    private final String LOAN_CALLBACK_QUEUE = "loans-fallback-queue";
-    private final String LOAN_CALLBACK_TOPIC = "loans-fallback-topic";
+    public static final String LOAN_CALLBACK_QUEUE = "loans-fallback-queue";
+    public static final String LOAN_CALLBACK_TOPIC = "loans-fallback-topic";
     private final String LOAN_CALLBACK_GROUP = "accounts-group";
 
     public LoansFallbackMessageListener(EventEmitter eventEmitter) {

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6486bea0-d3ab-431f-bbb9-22bc08607322",
+		"_postman_id": "3a9b5e72-2cd6-4c8b-84ac-812d6a945d44",
 		"name": "MSA_DAY4",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25548197"
@@ -507,7 +507,7 @@
 							"name": "기본Routes구성",
 							"item": [
 								{
-									"name": "CreateAccount Copy",
+									"name": "CreateAccount",
 									"request": {
 										"method": "POST",
 										"header": [],
@@ -537,7 +537,7 @@
 									"response": []
 								},
 								{
-									"name": "FetchCustomerDetails Copy",
+									"name": "FetchCustomerDetails",
 									"request": {
 										"method": "GET",
 										"header": [
@@ -570,7 +570,7 @@
 									"response": []
 								},
 								{
-									"name": "contact-info Copy",
+									"name": "contact-info",
 									"request": {
 										"method": "GET",
 										"header": [],
@@ -627,7 +627,7 @@
 									"response": []
 								},
 								{
-									"name": "FetchCustomerDetails",
+									"name": "FetchCustomerDetails_OpenFeign_Cards_Loans",
 									"request": {
 										"method": "GET",
 										"header": [
@@ -815,7 +815,7 @@
 									"response": []
 								},
 								{
-									"name": "FetchCardDetails Copy",
+									"name": "FetchCardDetails",
 									"request": {
 										"method": "GET",
 										"header": [],
@@ -843,7 +843,7 @@
 									"response": []
 								},
 								{
-									"name": "UpdateCardDetails Copy",
+									"name": "UpdateCardDetails",
 									"request": {
 										"method": "PUT",
 										"header": [],
@@ -874,7 +874,7 @@
 									"response": []
 								},
 								{
-									"name": "DeleteCardDetails Copy",
+									"name": "DeleteCardDetails",
 									"request": {
 										"method": "DELETE",
 										"header": [],
@@ -922,7 +922,7 @@
 									"response": []
 								},
 								{
-									"name": "Loans_HostName",
+									"name": "Loans_HostName_OpenFeign_Loans",
 									"request": {
 										"method": "GET",
 										"header": [],
@@ -954,13 +954,15 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "http://localhost:9208/api/create?mobileNumber=4354437687",
+											"raw": "http://localhost:9202/mgbank/loans/api/create?mobileNumber=4354437687",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "9208",
+											"port": "9202",
 											"path": [
+												"mgbank",
+												"loans",
 												"api",
 												"create"
 											],
@@ -980,13 +982,15 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "http://localhost:9208/api/fetch?mobileNumber=4354437687",
+											"raw": "http://localhost:9202/mgbank/loans/api/fetch?mobileNumber=4354437687",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "9208",
+											"port": "9202",
 											"path": [
+												"mgbank",
+												"loans",
 												"api",
 												"fetch"
 											],
@@ -1056,18 +1060,20 @@
 									"response": []
 								},
 								{
-									"name": "contact-info Copy",
+									"name": "contact-info",
 									"request": {
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "http://localhost:8090/api/contact-info",
+											"raw": "http://localhost:9202/mgbank/loans/api/contact-info",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "8090",
+											"port": "9202",
 											"path": [
+												"mgbank",
+												"loans",
 												"api",
 												"contact-info"
 											]
@@ -1117,7 +1123,7 @@
 							"response": []
 						},
 						{
-							"name": "직접호출_LoanHostNameByCard_Open_Feign",
+							"name": "직접호출_LoanHostNameByCard_OpenFeign",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -1140,12 +1146,12 @@
 							"response": []
 						},
 						{
-							"name": "APIGateway_CardHostName",
+							"name": "APIGateway_CardHostName_OpenFeign",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://192.168.100.221:30312/eazybank/cards/api/getHostName",
+									"raw": "http://192.168.100.221:30312/mgbank/cards/api/getHostName",
 									"protocol": "http",
 									"host": [
 										"192",
@@ -1155,7 +1161,7 @@
 									],
 									"port": "30312",
 									"path": [
-										"eazybank",
+										"mgbank",
 										"cards",
 										"api",
 										"getHostName"
@@ -1170,7 +1176,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://192.168.100.221:30312/eazybank/accounts/api/getHostName",
+									"raw": "http://192.168.100.221:30312/mgbank/accounts/api/getHostName",
 									"protocol": "http",
 									"host": [
 										"192",
@@ -1180,10 +1186,620 @@
 									],
 									"port": "30312",
 									"path": [
-										"eazybank",
+										"mgbank",
 										"accounts",
 										"api",
 										"getHostName"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "accounts",
+					"item": [
+						{
+							"name": "CreateAccount",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Madan Reddy\",\n    \"email\": \"tutor@eazybytes\",\n    \"mobileNumber\": \"4354437687\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/accounts/api/create",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"accounts",
+										"api",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FetchCustomerDetails",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "eazybank-correlation-id",
+										"value": "43gtrt-trtrrtgf",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/accounts/api/fetchCustomerDetails?mobileNumber=4354437687",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"accounts",
+										"api",
+										"fetchCustomerDetails"
+									],
+									"query": [
+										{
+											"key": "mobileNumber",
+											"value": "4354437687"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateAccountDetails",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Madan Mohan\",\n    \"email\": \"tutor@eazybytes\",\n    \"mobileNumber\": \"4354437687\",\n    \"accountsDto\": {\n        \"accountNumber\": 1152248596,\n        \"accountType\": \"Savings\",\n        \"branchAddress\": \"123 Main Street, New York\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/accounts/api/update",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"accounts",
+										"api",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteAccountDetails",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9206/api/delete?mobileNumber=4354437687",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9206",
+									"path": [
+										"api",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "mobileNumber",
+											"value": "4354437687"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Account_HostName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/accounts/api/getHostName",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"accounts",
+										"api",
+										"getHostName"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "contact-info",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/accounts/api/contact-info",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"accounts",
+										"api",
+										"contact-info"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "build-info",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/accounts/api/build-info",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"accounts",
+										"api",
+										"build-info"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "cards",
+					"item": [
+						{
+							"name": "CreateCard",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/cards/api/create?mobileNumber=4354437687",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"cards",
+										"api",
+										"create"
+									],
+									"query": [
+										{
+											"key": "mobileNumber",
+											"value": "4354437687"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FetchCardDetails",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/cards/api/fetch?mobileNumber=4354437687",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"cards",
+										"api",
+										"fetch"
+									],
+									"query": [
+										{
+											"key": "mobileNumber",
+											"value": "4354437687"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateCardDetails",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"mobileNumber\": \"4354437687\",\n    \"cardNumber\": \"100107091026\",\n    \"cardType\": \"Debit Card\",\n    \"totalLimit\": 100000,\n    \"amountUsed\": 10000,\n    \"availableAmount\": 90000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/cards/api/update",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"cards",
+										"api",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteCardDetails",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/cards/api/delete?mobileNumber=4354437687",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"cards",
+										"api",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "mobileNumber",
+											"value": "4354437687"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cards_HostName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/cards/api/getHostName",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"cards",
+										"api",
+										"getHostName"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Loans_HostName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/cards/api/getLoanHostName",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"cards",
+										"api",
+										"getLoanHostName"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "loans",
+					"item": [
+						{
+							"name": "CreateLoan",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/loans/api/create?mobileNumber=4354437687",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"loans",
+										"api",
+										"create"
+									],
+									"query": [
+										{
+											"key": "mobileNumber",
+											"value": "4354437687"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FetchLoanDetails",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/loans/api/fetch?mobileNumber=4354437687",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"loans",
+										"api",
+										"fetch"
+									],
+									"query": [
+										{
+											"key": "mobileNumber",
+											"value": "4354437687"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateLoanDetails",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"mobileNumber\": \"4354437687\",\n    \"loanNumber\": \"10071469799154\",\n    \"loanType\": \"Vehicle Loan\",\n    \"totalLoan\": -100000,\n    \"amountPaid\": -10000,\n    \"outstandingAmount\": -90000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/loans/api/update",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"loans",
+										"api",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteLoanDetails",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/loans/api/delete?mobileNumber=4354437687",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"loans",
+										"api",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "mobileNumber",
+											"value": "4354437687"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "contact-info Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30312/mgbank/loans/api/contact-info",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30312",
+									"path": [
+										"mgbank",
+										"loans",
+										"api",
+										"contact-info"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "configserver",
+					"item": [
+						{
+							"name": "RefreshConfig",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.100.221:30310/actuator/refresh",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30310",
+									"path": [
+										"actuator",
+										"refresh"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BusRefresh",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.100.221:30310/actuator/busrefresh",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"221"
+									],
+									"port": "30310",
+									"path": [
+										"actuator",
+										"busrefresh"
 									]
 								}
 							},

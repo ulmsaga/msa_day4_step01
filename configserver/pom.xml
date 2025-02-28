@@ -39,10 +39,19 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
-        <!-- <dependency>
+
+        <!-- Spring Bus RabbitMQ AMQP -->
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
-        </dependency> -->
+        </dependency>
+        
+        <!-- Github 에서 Webhooks 설정 시 -->
+        <!-- Spring Bus 자동 갱신-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-monitor</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

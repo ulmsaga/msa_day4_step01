@@ -23,7 +23,13 @@ pipeline {
         }
         
         stage('CheckPath') {
-            echo "Path is : \$PATH"
+            stemps {
+                dir('mgbankgui') {
+                    sh """
+                        echo "Path is: \$PATH"
+                    """
+                }
+            }
         }
 
         stage('Build React App') {

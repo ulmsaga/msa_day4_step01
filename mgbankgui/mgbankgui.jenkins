@@ -14,10 +14,6 @@ pipeline {
         NODE_BIN = "${NODE_HOME}/bin"
     }
 
-    tools {
-        nodejs 'node14.21.3'
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -29,6 +25,7 @@ pipeline {
             steps {
                 dir('mgbankgui') {
                     sh """
+                        echo "Using Node.js at: ${NODE_BIN}"
                         ${NODE_BIN}/node --version
                         ${NODE_BIN}/npm install
                         ${NODE_BIN}/npm run build

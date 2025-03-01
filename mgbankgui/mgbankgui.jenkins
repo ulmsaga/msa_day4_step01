@@ -12,6 +12,7 @@ pipeline {
         VERSION = 'v0.0.1'
         NODE_HOME = '/var/lib/jenkins/node-v14.21.3-linux-x64'
         NODE_BIN = "${NODE_HOME}/bin"
+        PATH = "${NODE_BIN}:${env.PATH}"
     }
 
     stages {
@@ -25,10 +26,13 @@ pipeline {
             steps {
                 dir('mgbankgui') {
                     sh """
+                        export PATH=${NODE_BIN}:$PATH
+                        echo "Path is: \$PATH"
                         echo "Using Node.js at: ${NODE_BIN}"
-                        ${NODE_BIN}/node --version
-                        ${NODE_BIN}/npm install
-                        ${NODE_BIN}/npm run build
+                        node --version
+                        npm --version
+                        NODE_PATH=${NODE_HOME}/lib/node_modules npm install
+                        NODE_PATH=${NODE_HOME}/lib/node_modules npm run build
                     """
                 }
             }

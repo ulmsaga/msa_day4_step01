@@ -26,7 +26,6 @@ pipeline {
                 dir('mgbankgui') {
                     sh """
                         echo "Using Node.js at: ${NODE_BIN}"
-                        ${NODE_BIN}/node --version
                         ${NODE_BIN}/npm install
                         ${NODE_BIN}/npm run build
                     """

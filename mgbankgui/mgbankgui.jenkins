@@ -10,7 +10,8 @@ pipeline {
         IMAGE_NAME = 'group1-team3-lsc-mgbankgui'
         APP = 'team3-lsc-mgbankgui'
         VERSION = '0.0.1'
-        NODE_HOME = '/var/lib/jenkins/node-v14.21.3-linux-x64'
+        // NODE_HOME = '/var/lib/jenkins/node-v14.21.3-linux-x64'
+        NODE_HOME = '/home/eva/.nvm/versions/node/v14.21.3'
         NODE_BIN = "${NODE_HOME}/bin"
         // PATH = "${NODE_BIN}:${env.PATH}"
         PATH = "${NODE_BIN}:${PATH}"

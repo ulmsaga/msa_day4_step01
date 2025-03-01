@@ -36,15 +36,18 @@ pipeline {
         stage('Build React App') {
             steps {
                 dir('mgbankgui') {
-                    sh """
-                        export PATH=${NODE_BIN}:$PATH
-                        echo "Path is: \$PATH"
-                        echo "Using Node.js at: ${NODE_BIN}"
-                        node --version
-                        npm --version
-                        NODE_PATH=${NODE_HOME}/lib/node_modules npm install
-                        NODE_PATH=${NODE_HOME}/lib/node_modules npm run build
-                    """
+                    // sh """
+                        // export PATH=${NODE_BIN}:$PATH
+                        // echo "Path is: \$PATH"
+                        // echo "Using Node.js at: ${NODE_BIN}"
+                        // node --version
+                        // npm --version
+                        // NODE_PATH=${NODE_HOME}/lib/node_modules npm install
+                        // NODE_PATH=${NODE_HOME}/lib/node_modules npm run build
+                    // """
+
+                    sh 'npm install'
+                    sh 'npm run build'
                 }
             }
         }

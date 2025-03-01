@@ -11,7 +11,7 @@ pipeline {
         APP = 'mgbankgui'
         VERSION = 'v0.0.1'
         NODE_HOME = '/home/eva/.nvm/versions/node/v14.21.3' // Node.js와 npm이 설치된 경로
-        PATH = "${NODE_HOME}/bin:${PATH}"
+        PATH = "${NODE_HOME}/bin:${env.PATH}"
     }
 
     stages {
@@ -24,8 +24,17 @@ pipeline {
         stage('Build React App') {
             steps {
                 dir('mgbankgui') {
-                    sh 'npm install'
-                    sh 'npm run build'
+                    // sh 'npm install'
+                    // sh 'npm run build'
+
+                    sh '''
+                        export NVM_DIR="$HOME/.nvm"
+                        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+                        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+                        nvm use 14.21.3
+                        npm install
+                        npm run build
+                    '''
                 }
             }
         }

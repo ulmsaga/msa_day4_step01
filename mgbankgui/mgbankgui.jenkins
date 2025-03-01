@@ -10,6 +10,8 @@ pipeline {
         IMAGE_NAME = 'group1-team3-lsc-mgbankgui'
         APP = 'mgbankgui'
         VERSION = 'v0.0.1'
+        NODE_HOME = '/home/eva/.nvm/versions/node/v14.21.3/bin' // Node.js와 npm이 설치된 경로
+        PATH = "${NODE_HOME}:${env.PATH}"
     }
 
     stages {

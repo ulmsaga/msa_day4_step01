@@ -22,6 +22,10 @@ pipeline {
             }
         }
         
+        stage('CheckPath') {
+            echo "Path is : \$PATH"
+        }
+
         stage('Build React App') {
             steps {
                 dir('mgbankgui') {
